@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-
 @Entity
 @Data
 @Table(name = "users")
@@ -41,22 +40,27 @@ public class User implements Serializable {
     private String role = "ROLE_CUSTOMER";
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore  
+    @JsonIgnore
     private Cart cart;
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", active=" + active +
-                ", role='" + role + '\'' +
-                '}';
+        return "User{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", name='" + name
+                + '\'' + ", phone='" + phone + '\'' + ", address='" + address + '\'' + ", active=" + active + ", role='"
+                + role + '\'' + '}';
+    }
+
+    public User(Long id, @NotEmpty String email,
+            @NotEmpty @Size(min = 3, message = "Length must be more than 3") String password, @NotEmpty String name,
+            @NotEmpty String phone, @NotEmpty String address, @NotNull boolean active, @NotEmpty String role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.active = active;
+        this.role = role;
     }
 
 }
-

@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 @Entity
 @Data
 @DynamicUpdate
@@ -48,5 +47,13 @@ public class ProductInfo implements Serializable {
     private Date updateTime;
 
     public ProductInfo() {
+    }
+
+    public ProductInfo(String productId, @NotNull String productName, @NotNull @Min(0) Integer productStock,
+            String productDescription) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productStock = productStock;
+        this.productDescription = productDescription;
     }
 }
